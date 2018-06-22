@@ -1,16 +1,5 @@
 package anagrams
 
-private fun CharArray.swap(firstSwapIndex: Int, secondSwapIndex: Int) {
-    val bufferElement = this[firstSwapIndex]
-    this[firstSwapIndex] = this[secondSwapIndex]
-    this[secondSwapIndex] = bufferElement
-}
-
-//fun main(args: Array<String>) {
-//    val set = setOf<String>("0123", "0132", "0312", "3012", "3021", "3201", "2301", "2310", "2130", "1230", "1203", "1023", "1023", "1203", "1230", "2130", "2310", "2301", "3201", "3021", "3012", "0312", "0132", "0123")
-//    print(set)
-//}
-
 class AnagramSource(inputString: String) {
     val anagrams: Set<String>;
 
@@ -28,11 +17,9 @@ class AnagramSource(inputString: String) {
     }
 
     private fun getAnagram(combinationId: Int, originalPhrase: CharArray): String {
-//        val firstSwapIndex = combinationId
-//        val secondSwapIndex = combinationId - 1
         val anagramBuilder = StringBuilder()
         for (anagramIndex in 0..originalPhrase.size) {
-            val charIndex = combinationId + anagramIndex
+            val charIndex = anagramIndex + combinationId + ...
             val char = originalPhrase[charIndex]
             anagramBuilder.append(char)
         }
@@ -40,7 +27,6 @@ class AnagramSource(inputString: String) {
     }
 
     /*
-
         0123 - move 3
         0132
         0312
