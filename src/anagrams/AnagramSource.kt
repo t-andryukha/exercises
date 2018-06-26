@@ -1,12 +1,14 @@
 package anagrams
 
+import java.util.concurrent.atomic.AtomicInteger
+
 private fun CharArray.swap(firstSwapIndex: Int, secondSwapIndex: Int) {
     val bufferElement = this[firstSwapIndex]
     this[firstSwapIndex] = this[secondSwapIndex]
     this[secondSwapIndex] = bufferElement
 }
 
-class AnagramSource(inputString: String) {
+class AnagramSource(inputString: String, private val counter: AtomicInteger = AtomicInteger()) {
     val anagrams: Set<String>;
 
     init {
@@ -25,6 +27,7 @@ class AnagramSource(inputString: String) {
             val secondSwapIndex = phraseLength - i
             var currentPhrase = originalPhrase
             if (firstSwapIndex != secondSwapIndex) {
+                println("${counter.incrementAndGet()} cloning char array")
                 currentPhrase = originalPhrase.clone()
                 currentPhrase.swap(firstSwapIndex, secondSwapIndex)
             }
