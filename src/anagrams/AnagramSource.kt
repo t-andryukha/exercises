@@ -1,32 +1,40 @@
 package anagrams
 
+private fun CharArray.swap(firstSwapIndex: Int, secondSwapIndex: Int) {
+    val bufferElement = this[firstSwapIndex]
+    this[firstSwapIndex] = this[secondSwapIndex]
+    this[secondSwapIndex] = bufferElement
+}
+
+//fun main(args: Array<String>) {
+//    val set = setOf<String>("0123", "0132", "0312", "3012", "3021", "3201", "2301", "2310", "2130", "1230", "1203", "1023", "1023", "1203", "1230", "2130", "2310", "2301", "3201", "3021", "3012", "0312", "0132", "0123")
+//    print(set)
+//}
+
 class AnagramSource(inputString: String) {
     val anagrams: Set<String>;
 
     init {
         val originalPhrase: CharArray = inputString.toCharArray()
-        anagrams = getAnagrams(originalPhrase)
+        val lastAnagram = originalPhrase.clone();
+
+        anagrams = getAnagrams(originalPhrase, lastAnagram)
     }
 
-    private fun getAnagrams(originalPhrase: CharArray): Set<String> {
+    private fun getAnagrams(originalPhrase: CharArray, lastAnagram: CharArray): HashSet<String> {
         val anagrams = HashSet<String>()
-        for (combinationId in 0..factorial(originalPhrase.size)) {
-            anagrams.add(getAnagram(combinationId, originalPhrase))
+        for (i in 0..factorial(originalPhrase.size)) {
+            val firstSwapIndex = i
+            val secondSwapIndex = i - 1
+
+            lastAnagram.swap(firstSwapIndex, secondSwapIndex)
+            anagrams.add(lastAnagram.joinToString { it.toString() })
         }
         return anagrams;
     }
 
-    private fun getAnagram(combinationId: Int, originalPhrase: CharArray): String {
-        val anagramBuilder = StringBuilder()
-        for (anagramIndex in 0..originalPhrase.size) {
-            val charIndex = anagramIndex + combinationId + ...
-            val char = originalPhrase[charIndex]
-            anagramBuilder.append(char)
-        }
-        return anagramBuilder.toString()
-    }
-
     /*
+
         0123 - move 3
         0132
         0312
@@ -40,6 +48,12 @@ class AnagramSource(inputString: String) {
         1203
         1023
         0123 - duplicate
+        start moving from last position -1 using original
+        0213
+        2013
+        2103
+        1203 - duplicate
+
 
     =================
 
