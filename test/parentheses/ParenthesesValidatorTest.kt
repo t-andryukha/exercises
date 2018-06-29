@@ -1,4 +1,4 @@
-package paratheses
+package parentheses
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -34,17 +34,17 @@ internal class ParenthesesValidatorTest {
 
     @Test
     internal fun `should be balanced #1`() {
-        assertFalse(ParenthesesValidator().isBalanced("[({})]"))
+        assertTrue(ParenthesesValidator().isBalanced("[({})]"))
     }
 
     @Test
     internal fun `should be balanced #2`() {
-        assertFalse(ParenthesesValidator().isBalanced("{}([])"))
+        assertTrue(ParenthesesValidator().isBalanced("{}([])"))
     }
 
     @Test
     internal fun `should be balanced #3`() {
-        assertFalse(ParenthesesValidator().isBalanced("{()}[[{}]]"))
+        assertTrue(ParenthesesValidator().isBalanced("{()}[[{}]]"))
     }
 
 }
