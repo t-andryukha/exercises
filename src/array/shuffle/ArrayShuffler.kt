@@ -32,13 +32,11 @@ class ArrayShuffler(val randomGenerator: RandomGenerator) {
     generate a random integer (min=r,max=array.size)
     swap the integers at indexes i and r
      */
-    fun <T> shuffle(sourceArray: Array<T>): Array<T> {
-        val shuffledArray = sourceArray.clone()
+    inline fun <reified T> shuffle(sourceArray: Array<T>): Array<T> {
+        val shuffledArray: Array<T> = arrayOfNulls<T>(sourceArray.size) as Array<T>//we are sure that we fill the array with below loop
         for (i in 0 until shuffledArray.size) {
-            val swapIndex = randomGenerator.between(i, shuffledArray.size)
-            val temp = shuffledArray[i]
-            shuffledArray[i] = shuffledArray[swapIndex]
-            shuffledArray[swapIndex] = temp
+            val randomIndex = randomGenerator.between(i, shuffledArray.size)
+            shuffledArray[i] = sourceArray[randomIndex]
         }
         return shuffledArray
     }
