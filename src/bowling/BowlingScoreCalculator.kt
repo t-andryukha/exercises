@@ -2,6 +2,7 @@ package bowling
 
 import bowling.result.frame.FrameResult
 import bowling.result.game.GameResult
+import java.util.*
 
 /**
  * Write a program to score a game of Ten-Pin Bowling.
@@ -80,22 +81,27 @@ class BowlingScoreCalculator {
     fun getScore(gameResult: String): Int {
         var totalScore = 0
         val bowlingGameResult = GameResult(gameResult)
-        var nextFrameResult = bowlingGameResult.bonusFrameResult
+        val nextBallsPins = Stack<Int>().apply {
+            push(0)
+            push(0)
+        }
+        val bonusBallsPins = bowlingGameResult.bonusFrameResult.pinsPerBall
+        bonusBallsPins.forEach { nextBallsPins.push(it) }
 
         for (currentFrameResult in bowlingGameResult.mainFrameResult) {
-            totalScore += getFrameScore(currentFrameResult, nextFrameResult)
-            nextFrameResult = currentFrameResult
+            totalScore += getFrameScore(currentFrameResult, nextBallsPins)
+            currentFrameResult.pinsPerBall.forEach { nextBallsPins.push(it) }
         }
         return totalScore
     }
 
-    private fun getFrameScore(currentFrameResult: FrameResult, nextFrameResult: FrameResult): Int {
+    private fun getFrameScore(currentFrameResult: FrameResult, nextPinsResults: List<Int>): Int {
         var frameScore = currentFrameResult.totalNumberOfPins
         if (currentFrameResult.isSpare) {
-            frameScore += nextFrameResult.pinsPerBall[0]
+            frameScore += nextPinsResults[0]
         } else if (currentFrameResult.isStrike) {
-            frameScore += nextFrameResult.pinsPerBall[0]
-            frameScore += nextFrameResult.pinsPerBall[1]
+            frameScore += nextPinsResults[0]
+            frameScore += nextPinsResults[1]
         }
         return frameScore
     }
