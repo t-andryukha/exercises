@@ -1,6 +1,6 @@
 package bowling.result.frame
 
-import bowling.result.game.ResultToken.*
+import bowling.ResultToken.*
 
 private const val PINS_PER_FRAME = 10
 

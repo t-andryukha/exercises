@@ -1,4 +1,4 @@
-package bowling.result.game
+package bowling
 
 enum class ResultToken(val token:Char) {
    BOUNDARY('|'),

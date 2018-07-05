@@ -1,7 +1,7 @@
 package bowling.result.game
 
 import bowling.result.frame.FrameResult
-import bowling.result.game.ResultToken.*
+import bowling.ResultToken.*
 
 /**
 X indicates a strike
