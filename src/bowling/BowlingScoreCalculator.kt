@@ -86,11 +86,11 @@ class BowlingScoreCalculator {
             push(0)
         }
         val bonusBallsPins = bowlingGameResult.bonusFrameResult.pinsPerBall
-        bonusBallsPins.forEach { nextBallsPins.push(it) }
+        bonusBallsPins.reversed().forEach { nextBallsPins.push(it) }
 
-        for (currentFrameResult in bowlingGameResult.mainFrameResult) {
+        for (currentFrameResult in bowlingGameResult.mainFrameResult.reversed()) {//could be optimized with reverse access using indexes, but don't bother for now
             totalScore += getFrameScore(currentFrameResult, nextBallsPins)
-            currentFrameResult.pinsPerBall.forEach { nextBallsPins.push(it) }
+            currentFrameResult.pinsPerBall.reversed().forEach { nextBallsPins.push(it) }
         }
         return totalScore
     }
@@ -98,10 +98,10 @@ class BowlingScoreCalculator {
     private fun getFrameScore(currentFrameResult: FrameResult, nextPinsResults: List<Int>): Int {
         var frameScore = currentFrameResult.totalNumberOfPins
         if (currentFrameResult.isSpare) {
-            frameScore += nextPinsResults[0]
+            frameScore += nextPinsResults.last()
         } else if (currentFrameResult.isStrike) {
-            frameScore += nextPinsResults[0]
-            frameScore += nextPinsResults[1]
+            frameScore += nextPinsResults.last()
+            frameScore += nextPinsResults[nextPinsResults.lastIndex - 1]
         }
         return frameScore
     }

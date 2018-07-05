@@ -1,7 +1,8 @@
 package bowling.result.frame
 
-import bowling.result.game.ResultToken
 import bowling.result.game.ResultToken.*
+
+private const val PINS_PER_FRAME = 10
 
 /**
 X indicates a strike
@@ -23,14 +24,14 @@ class FrameResult(frameResultTokens: String) {
             when (frameResultToken) {
                 MISS.token -> ballResult = 0
                 STRIKE.token -> {
-                    ballResult = 10
+                    ballResult = PINS_PER_FRAME
                     this.isStrike = true;
                 }
                 SPARE.token -> {
-                    ballResult = 10 - totalNumberOfPins
+                    ballResult = PINS_PER_FRAME - totalNumberOfPins
                     this.isSpare = true;
                 }
-                else -> ballResult = frameResultToken.toInt()
+                else -> ballResult = frameResultToken.toString().toInt()
             }
             pinsPerBall.add(ballResult)
             totalNumberOfPins += ballResult
