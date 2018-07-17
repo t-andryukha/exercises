@@ -49,13 +49,16 @@ class TowerOfHanoiTest {
         assertEquals(expectedTower, thirdTower)
     }
 
-    @Test
-    internal fun `should move one disk at a time`() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     @Test
     internal fun `should never put larger disk on the smaller`() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val moveDiskActions = TowerOfHanoiGenerator().generateActionSequence(10)
+
+        for (moveDiskAction in moveDiskActions) {
+            val diskToMove = towersMap[moveDiskAction.from]!!.pop()
+            val existingDisk = towersMap[moveDiskAction.to]!!.peekFirst()
+            assertTrue { existingDisk == null || existingDisk > diskToMove }
+            towersMap[moveDiskAction.to]!!.push(diskToMove)
+        }
     }
 }
