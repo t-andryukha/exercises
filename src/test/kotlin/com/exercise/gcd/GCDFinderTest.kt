@@ -27,6 +27,10 @@ internal class GCDFinderTest{
     internal fun `should return 2 given 6 and 10`() {
         assertEquals(2, GCDFinder().find(6,10))
     }
+    @Test
+    internal fun `should return itself given same numbers`() {
+        assertEquals(7, GCDFinder().find(7,7))
+    }
 
     @Test
     internal fun `should return 40 given 3400 and 360`() {
