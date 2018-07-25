@@ -19,6 +19,16 @@ internal class GCDFinderTest{
     }
 
     @Test
+    internal fun `should return 5 given 25 and 10`() {
+        assertEquals(5, GCDFinder().find(25,10))
+    }
+
+    @Test
+    internal fun `should return 2 given 6 and 10`() {
+        assertEquals(2, GCDFinder().find(6,10))
+    }
+
+    @Test
     internal fun `should return 40 given 3400 and 360`() {
         assertEquals(40, GCDFinder().find(3400,360))
     }
