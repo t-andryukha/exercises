@@ -13,7 +13,7 @@ class GCDFinder {
     /**
      * Euclid's algorithm
      */
-    private fun findRecursively(num1: Int, num2: Int): Int {
+    private tailrec fun findRecursively(num1: Int, num2: Int): Int {
         if (num2 % num1 == 0) return num1
         return findRecursively(num2%num1, num2)
     }
