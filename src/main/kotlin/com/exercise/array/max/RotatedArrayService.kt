@@ -15,6 +15,11 @@ class RotatedArrayService {
         val mid = (start + end) / 2
         if (array[mid] > array[mid + 1]) return array[mid]
 
+        return if (array[mid + 1] < array[start]) {
+            findMax(array, start, mid - 1)
+        } else {
+            findMax(array, mid + 1, end)
+        }
     }
 
 }
