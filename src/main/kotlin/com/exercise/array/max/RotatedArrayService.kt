@@ -11,7 +11,7 @@ class RotatedArrayService {
         return findMax(array, 0, array.size - 1)
     }
 
-    private fun findMax(array: Array<Int>, start: Int, end: Int): Int {
+    private tailrec fun findMax(array: Array<Int>, start: Int, end: Int): Int {
         val mid = (start + end) / 2
         if (array[mid] > array[mid + 1]) return array[mid]
 
