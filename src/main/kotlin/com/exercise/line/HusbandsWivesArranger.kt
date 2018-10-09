@@ -11,10 +11,22 @@ class HusbandsWivesArranger {
     }
 
 
-    private fun arrangeInLinearTimeAndLinearSpace(randomLine: List<String>): List<String> {
-        //todo you know how many wives/husbands will be but you don't know the maximum husband index
-
-        TODO()
+    /**
+     * Method is accounting on indices starting from 1 and increasing by 1
+     */
+    private fun arrangeInLinearTimeAndLinearSpace(randomLine: List<String>): List<String?> {
+        val arrangedLine = arrayOfNulls<String>(randomLine.size)
+        for (spouse in randomLine.iterator()) {
+            val spouseIndex = spouse.substring(1).toInt()
+            val arrangedIndex =
+                    if (spouse.startsWith(Spouse.HUSBAND.prefix)) {
+                        spouseIndex * 2 - 2
+                    } else {
+                        spouseIndex * 2 - 1
+                    }
+            arrangedLine[arrangedIndex] = spouse
+        }
+        return arrangedLine.toList()
     }
 
     private fun arrangeInNLogNTimeAndConstantSpace(randomLine: List<String>): List<String> {
@@ -28,6 +40,27 @@ class HusbandsWivesArranger {
             arrangedLine.add(sortedLine[sortedLine.size / 2 + index])
         }
         return arrangedLine
+    }
+
+    /**
+     * the argument array will be mutated
+     * Method is accounting on indices starting from 1 and increasing by 1
+     */
+    fun arrangeMutatingArgument(randomLine: Array<String>): List<String?> {
+        //todo insertion sort
+        val arrangedLine = arrayOfNulls<String>(randomLine.size)
+        for (spouse in randomLine.iterator()) {
+            val spouseIndex = spouse.substring(1).toInt()
+            val arrangedIndex =
+                    if (spouse.startsWith(Spouse.HUSBAND.prefix)) {
+                        spouseIndex * 2 - 2
+                    } else {
+                        spouseIndex * 2 - 1
+                    }
+            arrangedLine[arrangedIndex] = spouse
+        }
+        TODO()
+        return arrangedLine.toList()
     }
 
 }
