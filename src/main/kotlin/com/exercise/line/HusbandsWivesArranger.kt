@@ -1,26 +1,33 @@
 package com.exercise.line
 
+import java.util.*
+
 class HusbandsWivesArranger {
 
-    fun arrange(randomLine: List<String>): List<String> {
-//        return this.arrangeInLinearTimeAndLinearSpace(randomLine)
-        return this.arrangeInNLogNTimeAndConstantSpace(randomLine)
+    fun arrange(randomLine: List<String>, spaceOverTimePriority: Boolean = false) = if (spaceOverTimePriority) {
+        arrangeInNLogNTimeAndConstantSpace(randomLine)
+    } else {
+        arrangeInLinearTimeAndLinearSpace(randomLine)
     }
 
+
     private fun arrangeInLinearTimeAndLinearSpace(randomLine: List<String>): List<String> {
-        randomLine.
+        //todo you know how many wives/husbands will be but you don't know the maximum husband index
+
+        TODO()
     }
 
     private fun arrangeInNLogNTimeAndConstantSpace(randomLine: List<String>): List<String> {
         val sortedLine = randomLine.sorted().toTypedArray()
-        for ((index, spouse) in sortedLine.withIndex()) {
-            if (spouse.startsWith(Spouse.HUSBAND.prefix)) {
-                sortedLine.swap(index, index * 2)
-            } else if (spouse.startsWith(Spouse.WIFE.prefix)) {
-                sortedLine.swap(index, index / 2)
-            }
+
+        val arrangedLine = ArrayList<String>(sortedLine.size)
+
+        for (index in sortedLine.indices) {
+            if (index >= sortedLine.size / 2) break;
+            arrangedLine.add(sortedLine[index])
+            arrangedLine.add(sortedLine[sortedLine.size / 2 + index])
         }
-        return sortedLine.asList()
+        return arrangedLine
     }
 
 }
