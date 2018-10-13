@@ -28,7 +28,8 @@ class HusbandsWivesArrangerTest {
         val randomLine = arrangedLine.sortedWith(randomComparator)
         val randomLineArray = randomLine.toTypedArray()
         HusbandsWivesArranger().arrangeMutatingArgument(randomLineArray)
-        assertEquals(arrangedLine.toTypedArray(), randomLineArray)
+        assertEquals(arrangedLine, randomLineArray.asList())
     }
+        val arrangedLine = listOf("H1", "W1", "H2", "W2", "H3", "W3", "H4", "W4")
 
 }

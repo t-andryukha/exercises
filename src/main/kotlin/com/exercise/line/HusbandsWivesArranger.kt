@@ -18,12 +18,7 @@ class HusbandsWivesArranger {
         val arrangedLine = arrayOfNulls<String>(randomLine.size)
         for (spouse in randomLine.iterator()) {
             val spouseIndex = spouse.substring(1).toInt()
-            val arrangedIndex =
-                    if (spouse.startsWith(Spouse.HUSBAND.prefix)) {
-                        spouseIndex * 2 - 2
-                    } else {
-                        spouseIndex * 2 - 1
-                    }
+            val arrangedIndex = getArrangedIndex(spouse)
             arrangedLine[arrangedIndex] = spouse
         }
         return arrangedLine.toList()
@@ -46,21 +41,26 @@ class HusbandsWivesArranger {
      * the argument array will be mutated
      * Method is accounting on indices starting from 1 and increasing by 1
      */
-    fun arrangeMutatingArgument(randomLine: Array<String>): List<String?> {
-        //todo insertion sort
-        val arrangedLine = arrayOfNulls<String>(randomLine.size)
-        for (spouse in randomLine.iterator()) {
-            val spouseIndex = spouse.substring(1).toInt()
-            val arrangedIndex =
-                    if (spouse.startsWith(Spouse.HUSBAND.prefix)) {
-                        spouseIndex * 2 - 2
-                    } else {
-                        spouseIndex * 2 - 1
-                    }
-            arrangedLine[arrangedIndex] = spouse
+    fun arrangeMutatingArgument(randomLine: Array<String>) {
+        for ((index, spouse) in randomLine.withIndex()) {
+            var currSpouse = spouse
+            var arrangedIndex = -1
+            while (arrangedIndex != index) {
+                arrangedIndex = getArrangedIndex(currSpouse)
+                randomLine.swap(index, arrangedIndex)
+                currSpouse = randomLine[index]
+            }
         }
-        TODO()
-        return arrangedLine.toList()
+    }
+
+    private fun getArrangedIndex(spouse: String): Int {
+        val spouseIndex = spouse.substring(1).toInt()
+
+        return if (spouse.startsWith(Spouse.HUSBAND.prefix)) {
+            spouseIndex * 2 - 2
+        } else {
+            spouseIndex * 2 - 1
+        }
     }
 
 }
